@@ -43,7 +43,7 @@ timer.text(time);
 question.text(qAndA.q1.question);
 
 //make sure answers are displayed
-answer.append("<p>" + qAndA.q1.answer + "</p>").append("<p>" + qAndA.q1.wrong1 + "</p>").append("<p>" + qAndA.q1.wrong2 + "</p>").append("<p>" + qAndA.q1.wrong3 + "</p>");
+answer.append("<p><a href=''>" + qAndA.q1.answer + "</a></p>").append("<p><a href=''>" + qAndA.q1.wrong1 + "</a></p>").append("<p><a href=''>" + qAndA.q1.wrong2 + "</a></p>").append("<p><a href=''>" + qAndA.q1.wrong3 + "</a></p>");
 
 function countdown() {
     intervalId = setInterval(timeRemaining, 1000);

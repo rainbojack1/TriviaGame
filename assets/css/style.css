@@ -34,3 +34,9 @@ button{
 #resultRow{
     display: none;
 }
+
+#answer p a{
+    color: black;
+}
+
+
