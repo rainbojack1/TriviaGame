@@ -1,9 +1,36 @@
 body{
     background-image: url("../images/school.png");
 }
+
+header{
+    margin: auto;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+button{
+    margin: auto;
+}
+
 .container{
     background-color: darksalmon;
+    padding: 20px;
 }
-header{
+
+#restart-btn{
+    display: none;
+}
+
+#gameField{
+    display: none;
+    margin: auto;
+}
+
+#gameField div{
+    margin: auto;
     text-align: center;
+}
+
+#resultRow{
+    display: none;
 }

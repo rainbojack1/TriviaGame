@@ -16,6 +16,7 @@ var qAndA = {
 console.log("qAndA object: ", qAndA);
 console.log("First question: ", qAndA.q1.question);
 
-/*$("#start-btn").click(function () {
+$("#start-btn").click(function () {
     $("#start-btn").hide();
-});*/
+    $("#gameField").show();
+});
