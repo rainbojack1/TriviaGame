@@ -19,7 +19,34 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        
+
+        <div class="container">
+            <div class="row">
+                <header>
+                    <div class="col-md-12">
+                        <h1>Smarty Pants!</h1>
+                        <h3>A trivia game</h3>
+                    </div>
+                </header>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-warning start-btn">Let's Begin</button>
+                </div>
+            </div>
+            <div class="container" id="gameField">
+                <div class="row" id="timeLeft">
+                    <span>Time Remaining: </span>
+                    <span id="timer"></span>
+                </div>
+                <div class="row" id="questionRow">
+                    <span id="question"></span>
+                </div>
+                <div class="row" id="answerRow">
+                    <span id="answer"></span>
+                </div>
+            </div>
+        </div>
         <script src="assets/javascript/app.js" async defer></script>
     </body>
 </html>

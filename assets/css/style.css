@@ -1,0 +1,9 @@
+body{
+    background-image: url("../images/school.png");
+}
+.container{
+    background-color: darksalmon;
+}
+header{
+    text-align: center;
+}
