@@ -99,6 +99,7 @@ function displayQuestion(qNum){
 }
 
 function displayAnswers(){
+    
    //create a new <p> and display the values of the scrambled set
     /*function populateAnswerList(scram){
         $("#answer").append("<p><a href='' class='choice' data-val='" + scram + "'>" + scram + "</a><p>");
@@ -135,6 +136,8 @@ function checkAnswer(){
         n++;
         console.log("n= ", n);
         //displayQuestion(n);
+        $("#answer").empty();
+        startGame();
     })
     
 }
