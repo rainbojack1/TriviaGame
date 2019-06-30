@@ -5,8 +5,8 @@ let results = $("#results");
 let intervalId;
 let time = 10;
 let answerArr = [];
-//let scrambled = new Set();
-let n = 1;
+let n = 0;
+let qNum;
 let qAndA = {
     q1:{
         question: "How many letters are in the American alphabet?",
@@ -33,8 +33,8 @@ let qAndA = {
 
 
 
-console.log("qAndA object: ", qAndA);
-console.log("First question: ", qAndA.q1.question);
+// console.log("qAndA object: ", qAndA);
+// console.log("First question: ", qAndA.q1.question);
 
 $("#start-btn").click(function () {
     $("#start-btn").hide();
@@ -43,17 +43,15 @@ $("#start-btn").click(function () {
     startGame();
 });
 
-//make sure time is displayed.
-timer.text(time);
-//make sure questions are displayed
-// question.text(qAndA.q1.question);
-
 function startGame(){
+    time = 10;
+    //make sure time is displayed.
+    timer.text(time);
     countdown();
     timeRemaining();
-    scrambleAnswers();
+    //scrambleAnswers();
     displayQuestion(n);
-    displayAnswers();
+    //displayAnswers();
 }
 
 function countdown() {
@@ -71,63 +69,64 @@ function timeRemaining(){
     }
 }
 
-function scrambleAnswers(){
+function scrambleAnswers(aNum){
     //use a for-in loop to put the answers in answerArr
-    for(var x in qAndA.q1){
+    for(var x in qAndA[aNum]){
         //prints out the keys
-        console.log("x= ", x);
+        //console.log("x= ", x);
         if(x !== "question"){
-            answerArr.push(qAndA.q1[x]);
+            answerArr.push(qAndA[aNum][x]);
         }
         
     }
-    console.log("answerArr 1st: ", answerArr);
-        
+    console.log("answerArr: ", answerArr);
+    displayAnswers();
 }
 
-function displayQuestion(qNum){
+function displayQuestion(number){
     
-    if(qNum === 1){
-        $("#question").text(qAndA.q1.question);
-    }else if(qNum === 2){
-        $("#question").text(qAndA.q2.question);
-    }else if(qNum === 3){
-        $("#question").text(qAndA.q3.question);
+    var qArr = [];
+    for(var q in qAndA){
+        //prints out the keys
+        //console.log("q= ", q);
+        qArr.push(q);
     }
+    console.log("qArr: ", qArr);
 
-    displayAnswers();
+    qNum = qArr[number];
+    
+    $("#question").text(qAndA[qNum].question);
+
+    scrambleAnswers(qNum);
 }
 
 function displayAnswers(){
     
-   //create a new <p> and display the values of the scrambled set
-    /*function populateAnswerList(scram){
-        $("#answer").append("<p><a href='' class='choice' data-val='" + scram + "'>" + scram + "</a><p>");
-        //console.log("Can you see me?");
-    }
-    scrambled.forEach(populateAnswerList);*/
-
     let secondArray = [];
     for(var y = answerArr.length -1; y >= 0; y--){
         let randomNum = Math.floor(Math.random() * y);
-        console.log("Pushing value: " + answerArr[randomNum] + " from index: " + randomNum);
+        //console.log("Pushing value: " + answerArr[randomNum] + " from index: " + randomNum);
         secondArray.push(answerArr[randomNum]);
-        console.log(answerArr);
+        //console.log(answerArr);
         answerArr.splice(randomNum, 1);
-        console.log(answerArr);
+        //console.log(answerArr);
     }
     
     secondArray.forEach(element => {
         $("#answer").append("<p><a href='#' class='choice' data-val='" + element + "'>" + element + "</a><p>")
     });
 
-    checkAnswer();
+    console.log("qNum in displayAnswers: ", qNum);
+    checkAnswer(qNum);
+    //$(".choice").click(checkAnswer(qNum));
+    //$(document).on("click", ".choice", checkAnswer(qNum));
 }
 
-function checkAnswer(){
+function checkAnswer(caNum){
     $(".choice").click(function(){
+        //$(document).on("click", ".choice", function(){ 
         console.log("You chose ", $(this).data('val'));
-        if(($(this).data('val').toString() === qAndA.q1.answer)){
+        if(($(this).data('val').toString() === qAndA[caNum].answer)){
             console.log("Correct!");
         }
         else{
@@ -135,17 +134,15 @@ function checkAnswer(){
         }
         n++;
         console.log("n= ", n);
-        //displayQuestion(n);
         $("#answer").empty();
+
+        // setTimeout(function(){
+        //     startGame();
+        // }, 1000);
+
         startGame();
+        
     })
     
 }
 
-/*$("#start-btn").click(function(){
-    //displayAnswers();
-    //displayQuestion(n);
-    startGame();
-})*/
-
-//scrambleAnswers();
