@@ -5,6 +5,7 @@ let results = $("#results");
 let intervalId;
 let time = 10;
 let answerArr = [];
+let correctFlag = false;
 let n = 0;
 let qNum;
 let qAndA = {
@@ -38,12 +39,13 @@ let qAndA = {
 
 $("#start-btn").click(function () {
     $("#start-btn").hide();
-    $("#gameField").show();
+    // $("#gameField").show();
     //countdown();
     startGame();
 });
 
 function startGame(){
+    $("#gameField").show();
     time = 10;
     //make sure time is displayed.
     timer.text(time);
@@ -118,31 +120,56 @@ function displayAnswers(){
 
     console.log("qNum in displayAnswers: ", qNum);
     checkAnswer(qNum);
-    //$(".choice").click(checkAnswer(qNum));
-    //$(document).on("click", ".choice", checkAnswer(qNum));
+    
 }
 
 function checkAnswer(caNum){
     $(".choice").click(function(){
-        //$(document).on("click", ".choice", function(){ 
         console.log("You chose ", $(this).data('val'));
+        
         if(($(this).data('val').toString() === qAndA[caNum].answer)){
             console.log("Correct!");
+            correctFlag = true;
         }
         else{
             console.log("Wrong!");
         }
         n++;
         console.log("n= ", n);
+        console.log("checkAnswer correctFlag: ", correctFlag);
         $("#answer").empty();
 
         // setTimeout(function(){
         //     startGame();
-        // }, 1000);
-
-        startGame();
+        // }, 1000 * 3);
         
-    })
-    
+        displayResult();
+    })    
 }
 
+function displayResult(){
+    $("#timeLeft").hide();
+    $("#questionRow").hide();
+    $("#answerRow").hide();
+    $("#resultRow").show();
+    var showAnswer = $("<div>");
+    console.log("displayResult correctFlag: ", correctFlag);
+    if(correctFlag === true ){
+        showAnswer.append("<p>Correct!</p>");
+    }else{
+        showAnswer.append("<p>Wrong Answer</p>");
+    }
+    console.log("displayResult qNum: ", qNum);
+    console.log("displayResult qAndA[qNum].answer: ", qAndA[qNum].answer);
+    showAnswer.append("<p><h2>" + qAndA[qNum].answer + "</h2></p>");
+
+    $("#results").html(showAnswer);
+
+    setTimeout(function(){
+        $("#timeLeft").show();
+        $("#questionRow").show();
+        $("#answerRow").show();
+        $("#resultRow").hide();
+        startGame();
+    }, 1000 * 3);
+}
