@@ -7,6 +7,7 @@ let time = 10;
 let answerArr = [];
 let correctFlag = false;
 let completeFlag = false;
+let exitFlag = false;
 let winCount = 0;
 let loseCount = 0;
 let n = 0;
@@ -67,10 +68,42 @@ function timeRemaining(){
 
     if(time === 0){
         clearInterval(intervalId);
+        $("#answer").empty();
+        n++;
+        startGame();
     }
 }
 
+function displayQuestion(number){
+    console.log("displayQuestion");
+    
+    correctFlag = false;
+    
+    var qArr = [];
+    for(var q in qAndA){
+        qArr.push(q);
+    }
+    console.log("qArr: ", qArr);
+    console.log("n: ", n);
+    if(n >= qArr.length){
+        completeFlag = true;
+        //stop the function if no more questions in the array
+        exitFlag = true;
+        displayResult();
+        return;
+    }
+    
+    qNum = qArr[number];
+    
+    $("#question").text(qAndA[qNum].question);
+
+    scrambleAnswers(qNum);
+    
+    
+}
+
 function scrambleAnswers(aNum){
+    console.log("scrambleAnswers");
     //use a for-in loop to put the answers in answerArr
     for(var x in qAndA[aNum]){
         //prints out the keys
@@ -84,39 +117,14 @@ function scrambleAnswers(aNum){
     displayAnswers();
 }
 
-function displayQuestion(number){
-    correctFlag = false;
-    var qArr = [];
-    for(var q in qAndA){
-        //prints out the keys
-        //console.log("q= ", q);
-        qArr.push(q);
-    }
-    console.log("qArr: ", qArr);
-    console.log("n: ", n);
-    if(n === qArr.length){
-        completeFlag = true;
-        displayResult();
-    }
-    qNum = qArr[number];
-    
-    $("#question").text(qAndA[qNum].question);
-
-    scrambleAnswers(qNum);
-    
-    
-}
 
 function displayAnswers(){
-    
+    console.log("displayAnswers");
     let secondArray = [];
     for(var y = answerArr.length -1; y >= 0; y--){
         let randomNum = Math.floor(Math.random() * y);
-        //console.log("Pushing value: " + answerArr[randomNum] + " from index: " + randomNum);
         secondArray.push(answerArr[randomNum]);
-        //console.log(answerArr);
-        answerArr.splice(randomNum, 1);
-        //console.log(answerArr);
+        answerArr.splice(randomNum, 1);        
     }
     
     secondArray.forEach(element => {
@@ -129,6 +137,7 @@ function displayAnswers(){
 }
 
 function checkAnswer(caNum){
+    console.log("checkAnswer");
     $(".choice").click(function(){
         console.log("You chose ", $(this).data('val'));
         
@@ -143,28 +152,26 @@ function checkAnswer(caNum){
         }
         n++;
         console.log("n= ", n);
-        console.log("checkAnswer correctFlag: ", correctFlag);
+        
         $("#answer").empty();
 
-        // setTimeout(function(){
-        //     startGame();
-        // }, 1000 * 3);
-        
         displayResult();
     })    
 }
 
 function displayResult(){
+    console.log("displayResult");
     $("#timeLeft").hide();
     $("#questionRow").hide();
     $("#answerRow").hide();
     $("#resultRow").show();
     var showAnswer = $("<div>");
-    console.log("displayResult correctFlag: ", correctFlag);
+    
     if(completeFlag === true){
         showAnswer.append("<p><h2>Game Over</h2></p>");
         showAnswer.append("<p> You got " + winCount + " correct!</p>");
         showAnswer.append("<p> You got " + loseCount + " wrong.</p>");
+        //showAnswer.append("<button id='playAgain'>Play again?</button>");        
     }else if(correctFlag === true ){
         showAnswer.append("<p>Correct!</p>");
         showAnswer.append("<p><h2>" + qAndA[qNum].answer + "</h2></p>");
@@ -172,17 +179,25 @@ function displayResult(){
         showAnswer.append("<p>Wrong Answer</p>");
         showAnswer.append("<p><h2>" + qAndA[qNum].answer + "</h2></p>");
     }
-    console.log("displayResult qNum: ", qNum);
-    console.log("displayResult qAndA[qNum].answer: ", qAndA[qNum].answer);
     
+    /*$(document).on("click","#playAgain", function(){
+        console.log("Play Again");
+        console.log("Why 4x ?");
+    });*/
 
     $("#results").html(showAnswer);
 
     setTimeout(function(){
-        $("#timeLeft").show();
-        $("#questionRow").show();
-        $("#answerRow").show();
-        $("#resultRow").hide();
-        startGame();
-    }, 1000 * 3);
+        if(!exitFlag){
+            showPlayingField();
+        }
+    }, 1000 * 1);
+}
+
+function showPlayingField(){
+    $("#timeLeft").show();
+    $("#questionRow").show();
+    $("#answerRow").show();
+    $("#resultRow").hide();
+    startGame();
 }
