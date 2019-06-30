@@ -6,6 +6,9 @@ let intervalId;
 let time = 10;
 let answerArr = [];
 let correctFlag = false;
+let completeFlag = false;
+let winCount = 0;
+let loseCount = 0;
 let n = 0;
 let qNum;
 let qAndA = {
@@ -32,10 +35,6 @@ let qAndA = {
     }
 };
 
-
-
-// console.log("qAndA object: ", qAndA);
-// console.log("First question: ", qAndA.q1.question);
 
 $("#start-btn").click(function () {
     $("#start-btn").hide();
@@ -86,7 +85,7 @@ function scrambleAnswers(aNum){
 }
 
 function displayQuestion(number){
-    
+    correctFlag = false;
     var qArr = [];
     for(var q in qAndA){
         //prints out the keys
@@ -94,12 +93,18 @@ function displayQuestion(number){
         qArr.push(q);
     }
     console.log("qArr: ", qArr);
-
+    console.log("n: ", n);
+    if(n === qArr.length){
+        completeFlag = true;
+        displayResult();
+    }
     qNum = qArr[number];
     
     $("#question").text(qAndA[qNum].question);
 
     scrambleAnswers(qNum);
+    
+    
 }
 
 function displayAnswers(){
@@ -130,9 +135,11 @@ function checkAnswer(caNum){
         if(($(this).data('val').toString() === qAndA[caNum].answer)){
             console.log("Correct!");
             correctFlag = true;
+            winCount++;
         }
         else{
             console.log("Wrong!");
+            loseCount++;
         }
         n++;
         console.log("n= ", n);
@@ -154,14 +161,20 @@ function displayResult(){
     $("#resultRow").show();
     var showAnswer = $("<div>");
     console.log("displayResult correctFlag: ", correctFlag);
-    if(correctFlag === true ){
+    if(completeFlag === true){
+        showAnswer.append("<p><h2>Game Over</h2></p>");
+        showAnswer.append("<p> You got " + winCount + " correct!</p>");
+        showAnswer.append("<p> You got " + loseCount + " wrong.</p>");
+    }else if(correctFlag === true ){
         showAnswer.append("<p>Correct!</p>");
+        showAnswer.append("<p><h2>" + qAndA[qNum].answer + "</h2></p>");
     }else{
         showAnswer.append("<p>Wrong Answer</p>");
+        showAnswer.append("<p><h2>" + qAndA[qNum].answer + "</h2></p>");
     }
     console.log("displayResult qNum: ", qNum);
     console.log("displayResult qAndA[qNum].answer: ", qAndA[qNum].answer);
-    showAnswer.append("<p><h2>" + qAndA[qNum].answer + "</h2></p>");
+    
 
     $("#results").html(showAnswer);
 
