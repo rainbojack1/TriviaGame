@@ -15,6 +15,7 @@ button{
 .container{
     background-color: darksalmon;
     padding: 20px;
+    /*height: 600px;*/
 }
 
 #restart-btn{
@@ -39,4 +40,13 @@ button{
     color: black;
 }
 
+#start{
+    margin: 0;
+    position: relative;
+    top: 50%;
+    transform: translateY(200%);
+}
 
+#game-window{
+    height: 600px;
+}
