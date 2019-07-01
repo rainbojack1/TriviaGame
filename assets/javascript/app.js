@@ -33,6 +33,55 @@ let qAndA = {
         wrong1: "7",
         wrong2: "365",
         wrong3: "63"
+    },
+    q4:{
+        question: "Which TV character said, “Live long and prosper”?",
+        answer: "Mr. Spock",
+        wrong1: "Shrek",
+        wrong2: "Buzz Lightyear",
+        wrong3: "Mork"
+    },
+    q5:{
+        question: "What is the name of Batman’s butler?",
+        answer: "Alfred",
+        wrong1: "Geoffrey",
+        wrong2: "Calvin",
+        wrong3: "Bruce"
+    },
+    q6:{
+        question: "How is the groundnut better known?",
+        answer: "Peanut",
+        wrong1: "Hazelnut",
+        wrong2: "Walnut",
+        wrong3: "Pecan"
+    },
+    q7:{
+        question: "According to Greek mythology who was the first woman on earth?",
+        answer: "Pandora",
+        wrong1: "Medusa",
+        wrong2: "Diomede",
+        wrong3: "Theonoe"
+    },
+    q8:{
+        question: "Cruella de Vil is the villain in which Disney movie?",
+        answer: "101 Dalmatians",
+        wrong1: "Oliver and Company",
+        wrong2: "Lady and the Tramp",
+        wrong3: "Snow White"
+    },
+    q9:{
+        question: "What does the crocodile swallow in Peter Pan?",
+        answer: "A clock",
+        wrong1: "A pair of scissors",
+        wrong2: "A book",
+        wrong3: "A violin"
+    },
+    q10:{
+        question: "Scar is a villain in which Disney movie?",
+        answer: "The Lion King",
+        wrong1: "Atlantis",
+        wrong2: "Black Panther",
+        wrong3: "Mulan"
     }
 };
 
