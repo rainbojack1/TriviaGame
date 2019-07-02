@@ -36,6 +36,14 @@ img{
     text-align: center;
 }
 
+#timeLeft{
+    padding: 10px;
+}
+
+#questionRow{
+    padding: 10px;
+}
+
 #resultRow{
     display: none;
 }
