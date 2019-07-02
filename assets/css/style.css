@@ -12,10 +12,14 @@ button{
     margin: auto;
 }
 
+img{
+    width: 100%;
+    max-height: 325px;
+}
+
 .container{
     background-color: darksalmon;
     padding: 20px;
-    /*height: 600px;*/
 }
 
 #restart-btn{
@@ -50,3 +54,11 @@ button{
 #game-window{
     height: 600px;
 }
+
+#picture{
+    margin: auto;
+    width: 30%;
+    height: auto;
+}
+
+

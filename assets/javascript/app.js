@@ -1,7 +1,7 @@
 let question = $("#question");
-let answer = $("#answer");
+//let answer = $("#answer");
 let timer = $("#timer");
-let results = $("#results");
+//let results = $("#results");
 let intervalId;
 let time = 10;
 let answerArr = [];
@@ -85,11 +85,10 @@ let qAndA = {
     }
 };
 
+let picArr = ['assets/images/alphabet.jpeg', 'assets/images/months.png', 'assets/images/weeks.jpg', 'assets/images/spock.jpg', 'assets/images/alfred.jpg', 'assets/images/mrpeanut.jpg', 'assets/images/pandora.jpg', 'assets/images/cruella.png', 'assets/images/crocodile.jpg', 'assets/images/scar.jpg', 'assets/images/gameOver.jpg'];
 
 $("#start-btn").click(function () {
     $("#start-btn").hide();
-    // $("#gameField").show();
-    //countdown();
     startGame();
 });
 
@@ -119,7 +118,7 @@ function timeRemaining(){
         clearInterval(intervalId);
         $("#answer").empty();
         n++;
-        startGame();
+        displayResult();
     }
 }
 
@@ -155,8 +154,6 @@ function scrambleAnswers(aNum){
     console.log("scrambleAnswers");
     //use a for-in loop to put the answers in answerArr
     for(var x in qAndA[aNum]){
-        //prints out the keys
-        //console.log("x= ", x);
         if(x !== "question"){
             answerArr.push(qAndA[aNum][x]);
         }
@@ -214,12 +211,14 @@ function displayResult(){
     $("#questionRow").hide();
     $("#answerRow").hide();
     $("#resultRow").show();
+    $("#picture").empty();
     var showAnswer = $("<div>");
     
     if(completeFlag === true){
         showAnswer.append("<p><h2>Game Over</h2></p>");
         showAnswer.append("<p> You got " + winCount + " correct!</p>");
         showAnswer.append("<p> You got " + loseCount + " wrong.</p>");
+        $("#picture").empty();
         //showAnswer.append("<button id='playAgain'>Play again?</button>");        
     }else if(correctFlag === true ){
         showAnswer.append("<p>Correct!</p>");
@@ -228,11 +227,13 @@ function displayResult(){
         showAnswer.append("<p>Wrong Answer</p>");
         showAnswer.append("<p><h2>" + qAndA[qNum].answer + "</h2></p>");
     }
-    
+
+    $("#picture").append("<img src=" + picArr[n - 1] + " alt='answerPic'/>");
     /*$(document).on("click","#playAgain", function(){
         console.log("Play Again");
         console.log("Why 4x ?");
     });*/
+    console.log("displayResult n= ", n);
 
     $("#results").html(showAnswer);
 
@@ -240,7 +241,7 @@ function displayResult(){
         if(!exitFlag){
             showPlayingField();
         }
-    }, 1000 * 1);
+    }, 1000 * 2);
 }
 
 function showPlayingField(){
