@@ -214,10 +214,13 @@ function displayResult(){
     $("#picture").empty();
     var showAnswer = $("<div>");
 
+    $("#picture").append("<img src=" + picArr[n - 1] + " alt='answerPic'/>");
+    
     if(completeFlag === true){
         showAnswer.append("<p><h2>Game Over</h2></p>");
         showAnswer.append("<p> You got " + winCount + " correct!</p>");
         showAnswer.append("<p> You got " + loseCount + " wrong.</p>");
+        $("#picture").html("<img src=" + picArr[picArr.length - 1] + " alt='answerPic'/>");
         $("#restart-btn").show();
     }else if(correctFlag === true ){
         showAnswer.append("<p>Correct!</p>");
@@ -227,7 +230,7 @@ function displayResult(){
         showAnswer.append("<p><h2>" + qAndA[qNum].answer + "</h2></p>");
     }
 
-    $("#picture").append("<img src=" + picArr[n - 1] + " alt='answerPic'/>");
+    // $("#picture").append("<img src=" + picArr[n - 1] + " alt='answerPic'/>");
     
     $("#restart-btn").on("click", function(){
         console.log("Play Again");
