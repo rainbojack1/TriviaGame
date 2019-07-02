@@ -213,13 +213,12 @@ function displayResult(){
     $("#resultRow").show();
     $("#picture").empty();
     var showAnswer = $("<div>");
-    
+
     if(completeFlag === true){
         showAnswer.append("<p><h2>Game Over</h2></p>");
         showAnswer.append("<p> You got " + winCount + " correct!</p>");
         showAnswer.append("<p> You got " + loseCount + " wrong.</p>");
-        $("#picture").empty();
-        //showAnswer.append("<button id='playAgain'>Play again?</button>");        
+        $("#restart-btn").show();
     }else if(correctFlag === true ){
         showAnswer.append("<p>Correct!</p>");
         showAnswer.append("<p><h2>" + qAndA[qNum].answer + "</h2></p>");
@@ -229,10 +228,15 @@ function displayResult(){
     }
 
     $("#picture").append("<img src=" + picArr[n - 1] + " alt='answerPic'/>");
-    /*$(document).on("click","#playAgain", function(){
+    
+    $("#restart-btn").on("click", function(){
         console.log("Play Again");
-        console.log("Why 4x ?");
-    });*/
+        clearInterval();
+        $("#answer").empty();
+        n = 0;
+        showPlayingField();
+    });
+
     console.log("displayResult n= ", n);
 
     $("#results").html(showAnswer);
